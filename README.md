@@ -8,7 +8,6 @@ pip install -r requirements.txt
 git clone https://github.com/lucasdavid/wikiart
 python3 wikiart/wikiart.py
 ```
-Folders then look like:
 ```
 art-recommendation
 ├── wikiart
@@ -19,7 +18,6 @@ art-recommendation
 ```
 python3 download.py
 ```
-Folders look like:
 ```
 art-recommendation
 ├── images
