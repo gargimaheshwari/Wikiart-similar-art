@@ -50,10 +50,13 @@ def httpe(link):
 os.makedirs("images", exist_ok = True)
 
 def downloader(n, jsondata):
-    k = 0
+    if n:
+        num_images = n
+    else:
+        num_images = jsondata.shape[0]
     
     print("Downloading images")
-    for i in tqdm(range(jsondata.shape[0])):
+    for i in tqdm(range(num_images)):
         link = jsondata.loc[i, "image"]
         name = jsondata.loc[i, "url"]
         artist = jsondata.loc[i, "artistUrl"]
@@ -78,11 +81,6 @@ def downloader(n, jsondata):
         out = Image.fromarray(img)
         out.save(os.path.join("images", artist+"_"+name+".png"))
         out.close()
-
-        if n: 
-            k+=1
-            if k>=n:
-                break
 
     print("\nNumber of images downloaded: " + \
         str(sum([len(files) for r, d, files in os.walk("images")])))
