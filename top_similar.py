@@ -13,6 +13,9 @@ def top10(sim_matrix, model):
         similar = sim_matrix.iloc[i, :].sort_values(ascending = False).head(11)
         similar_names.iloc[i, :] = list(similar.index)
         similar_values.iloc[i, :] = similar.values
-
+    
+    assert similar_names.notna().values.all()
+    assert similar_values.notna().values.all()
+    
     similar_names.to_pickle(os.path.join("pickles", model, "similar_names.pkl"))
     similar_values.to_pickle(os.path.join("pickles", model, "similar_values.pkl"))

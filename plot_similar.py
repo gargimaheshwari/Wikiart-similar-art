@@ -18,12 +18,16 @@ except getopt.GetoptError:
 if not opts:
     print("Image name is required")
     sys.exit(2)
-else:    
+else:
+    m = True
+    i = True
     for opt, arg in opts:
         if opt in ('-i', '--image'):
             input_image = arg
+            i = False
         elif opt in ('-m', '--model'):
             model = arg
+            m = False
         elif opt in ('-h', '--help'):
             print("Usage: python <filename.py> -i image -m model")
             print("Name of the image should be in the format: artist-name_image-name[.png]")
@@ -32,6 +36,11 @@ else:
         else:
             print("Check your arguments")
             sys.exit(2)
+    if m:
+        print("No model given. Using default: {}".format(model))
+    if i:
+        print("Image name is required")
+        sys.exit(2)
 
 folder = "similar_images"
 os.makedirs(folder, exist_ok = True)

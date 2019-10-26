@@ -30,4 +30,4 @@ else:
             sys.exit(2)
 
 downloader(n, jsonloader())
-resizer()
+resizer(n)

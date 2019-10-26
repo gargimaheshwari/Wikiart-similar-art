@@ -81,6 +81,9 @@ def downloader(n, jsondata):
         out = Image.fromarray(img)
         out.save(os.path.join("images", artist+"_"+name+".png"))
         out.close()
-
+    
+    num_downloaded = len(os.listdir("images"))
+    assert num_downloaded == num_images
+    
     print("\nNumber of images downloaded: " + \
-        str(sum([len(files) for r, d, files in os.walk("images")])))
+        str(num_downloaded))

@@ -2,7 +2,7 @@ from PIL import Image
 import os
 from torchvision import transforms
 
-def resizer():
+def resizer(n):
     resize = transforms.Compose([transforms.Resize((224,224))])
 
     directory = "images"
@@ -15,3 +15,5 @@ def resizer():
         new_img.save(os.path.join("resized", file))
         new_img.close()
         img.close()
+    
+    assert len(os.listdir("resized")) == n

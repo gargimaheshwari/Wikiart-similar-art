@@ -1,12 +1,14 @@
 import pickle
 import os
 import sys
+from numpy.testing import assert_almost_equal
 
 def get_names(name, similar_names, similar_values):
     print("Getting similar images")
     images = list(similar_names.loc[name, :])
     values = list(similar_values.loc[name, :])
     if name in images:
+        assert_almost_equal(max(values), 1, decimal = 5)
         images.remove(name)
         values.remove(max(values))
     return name, images, values

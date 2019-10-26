@@ -19,11 +19,15 @@ except getopt.GetoptError:
     sys.exit(2)
 if not opts:
     print("Using default options. Model: resnet18, Cuda: False")
-else:    
+else:
+    c = True
+    m = True
     for opt, arg in opts:
         if opt in ('-c', '--cuda'):
+            c = False
             cuda = arg
         elif opt in ('-m', '--model'):
+            m = False
             model = arg
         elif opt in ('-h', '--help'):
             print("Usage: python <filename.py> -c cuda -m model")
@@ -33,6 +37,10 @@ else:
         else:
             print("Check your arguments")
             sys.exit(2)
+    if c:
+        print("CUDA not given. Using CPU")
+    if m:
+        print("No model given. Using default: resnet18")
 
 matrix = matrix_calculator(img2vec_converter(model, cuda))
 

@@ -19,9 +19,12 @@ def img2vec_converter(model, cuda):
             #converting them to rgb solves this issue
         except RuntimeError:
             vec = img2vec.get_vec(img.convert('RGB'))
+        assert len(vec) == img2vec.layer_output_size
         vectors[image] = vec
         img.close() 
-
+    
+    assert len(vectors) == len(os.listdir("resized"))
+    
     print("Saving image vectors")
     os.makedirs(os.path.join("pickles", model), exist_ok = True)
     file = open(os.path.join('pickles', model, 'vectors.pkl'), 'wb')
